@@ -1,12 +1,17 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
 from bs4 import BeautifulSoup
 from random_user_agent.user_agent import UserAgent
 from random_user_agent.params import SoftwareName, OperatingSystem
 import os
 import urllib.request
 import sys
+import string
+import random
 
-
+service = Service(GeckoDriverManager().install())
+service.start()
 mainUrl = 'https://unsplash.com/s/photos/'
 
 
@@ -37,8 +42,7 @@ def get_driver():
     options.add_argument('--incognito')
     options.add_argument('--headless')
     options.add_argument("user-agent=" + str(get_user_agent()))
-    driver = webdriver.Firefox(
-        executable_path=os.getcwd() + '/../driver/geckodriver', options=options)
+    driver = webdriver.Firefox(service=service, options=options)
     return driver
 
 
@@ -52,7 +56,11 @@ def loop_images(images, path):
 # --------------------------------------------------- Get Image ------------------------------------------------------ #
 def get_image(url, path):
     try:
-        (filename, headers) = urllib.request.urlretrieve(url=url, filename=path)
+        img_name = path + '/' + \
+            ''.join(random.choices(string.ascii_uppercase +
+                    string.digits, k=10)) + '.png'
+        (filename, headers) = urllib.request.urlretrieve(
+            url=url, filename=img_name)
     except Exception as e:
         print('\033[91m' + 'import => ' + str(e) + '\033[91m')
     return 0
