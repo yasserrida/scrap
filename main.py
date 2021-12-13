@@ -27,7 +27,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-# --------------------------------------------------- Get Use Agent -------------------------------------------------- #
+# --------------------------------------------------- Get User Agent -------------------------------------------------- #
 def get_user_agent():
     software_names = [SoftwareName.CHROME.value, SoftwareName.FIREFOX.value]
     operating_systems = [OperatingSystem.WINDOWS.value,
@@ -59,6 +59,7 @@ def get_image(url, path):
         img_name = path + '/' + \
             ''.join(random.choices(string.ascii_uppercase +
                     string.digits, k=10)) + '.png'
+        print(img_name)
         (filename, headers) = urllib.request.urlretrieve(
             url=url, filename=img_name)
     except Exception as e:
