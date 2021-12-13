@@ -27,7 +27,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-# --------------------------------------------------- Get User Agent -------------------------------------------------- #
+# -------------------------------------------------- Get User Agent -------------------------------------------------- #
 def get_user_agent():
     software_names = [SoftwareName.CHROME.value, SoftwareName.FIREFOX.value]
     operating_systems = [OperatingSystem.WINDOWS.value,
@@ -104,5 +104,7 @@ if __name__ == '__main__':
             if(not os.path.isdir(dataPath)):
                 os.mkdir(os.getcwd() + '/data/' + categorie)
             init(categorie=categorie,  DirName=dataPath)
+        else:
+            print(bcolors.FAIL + 'Veuillez entrer une categorie' + bcolors.FAIL)
     except Exception as e:
         print(bcolors.FAIL + 'main => ' + str(e) + bcolors.FAIL)
