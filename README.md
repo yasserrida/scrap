@@ -13,6 +13,7 @@ pip3 install webdriver_manager
 ```
 
 <h1>Run</h1>
+
 ```bash
 python3 main.py [categorie]
 ```
